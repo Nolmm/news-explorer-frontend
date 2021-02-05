@@ -1,0 +1,145 @@
+.results {
+  background-color: rgba(245, 246, 247, 1);
+  width: 100%;
+  padding-left: 104px;
+  padding-right: 104px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+}
+
+.results__title {
+  font-family: 'Robotoslab';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 1.15;
+  color: #1A1B22;
+  margin-top: 0;
+  margin-bottom: 64px;
+}
+
+.results__button_conteiner {
+  display: flex;
+}
+
+.results__button {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  background: #FFFFFF;
+  border-radius: 80px;
+  width: 288px;
+  height: 64px;
+  margin-top: 64px;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.results__button:hover {
+  opacity: 0.9;
+  background: #FFFFFF;
+}
+
+.results__bookmark {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background-image: url(../../images/bookmark.svg);
+}
+
+.results__bookmark:hover::before {
+  content: 'Войдите, чтобы сохранять статьи';
+  width: 182px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 45px;
+}
+
+.results__bookmark:hover {
+  cursor: pointer;
+  background-image: url(../../images/bookmark_hover.svg);
+}
+
+.results__bookmark-marked {
+  background-image: url(../../images/bookmark__marked.svg);
+}
+
+.results__bookmark-marked:hover {
+  background-image: url(../../images/bookmark__marked.svg);
+}
+
+@media screen and (max-width: 888px) {
+
+  .results {
+    padding: 40px;
+  }
+  
+  .results__title {
+    margin-bottom: 32px;
+    font-size: 30px;
+    line-height: 1.13;
+  }
+  
+  .results__button {
+    font-size: 18px;
+    line-height: 1.33;
+    background: #FFFFFF;
+    border-radius: 80px;
+    width: 240px;
+    height: 56px ;
+    margin-top: 32px;
+    margin-bottom: 0;
+  }
+  
+  .results__bookmark {
+    top: 8px;
+    right: 8px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  .results__button {
+    width: 90%;
+  }
+
+.results {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  }
+
+.results__title {
+  max-width: 288px;
+  margin-bottom: 24px;
+  }
+
+}
+

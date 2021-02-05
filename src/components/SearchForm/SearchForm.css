@@ -1,0 +1,187 @@
+.searchform{
+  background-image: url(../../images/georgia.jpg);
+  width: 100%;
+  height: 576px;
+  margin-top: -81px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.searchform__title {
+  font-family: 'Robotoslab';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 1.07;
+  color: #FFFFFF;
+  max-width: 500px;
+  margin-top: 80px;
+  margin-bottom: 32px;
+}
+
+.searchform__subtitle {
+  max-width: 500px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #FFFFFF;
+  margin-top: 0;
+  margin-bottom: 64px;
+}
+
+.searchform__form {
+  display: flex;
+  flex-direction: row;
+}
+
+.searchform__input {
+  background: #FFFFFF;
+  padding-left: 24px;
+  padding-right: 190px;
+  box-sizing: border-box;
+  border: 1px solid #D1D2D6;
+  box-sizing: border-box;
+  width: 608px;
+  height: 64px;
+  border-radius: 100px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.37;
+  color: #1A1B22;
+
+}
+
+.searchform__input::placeholder {
+  color: #b6bcbf;
+}
+
+.searchform__button {
+  background: #2F71E5;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  border-radius: 100px;
+  height: 64px;
+  width: 168px;
+  margin-left: -168px;
+  text-align: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+}
+
+.searchform__button:hover{
+  background: #347EFF;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+}
+
+.searchform__button:active {
+  background: #2A65CC;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  border-radius: 100px;
+}
+
+
+@media screen and (max-width: 768px)  {
+
+  .searchform{
+    background-image: url(../../images/back-tablet.jpg);
+    height: 400px;
+  }
+
+  .searchform__title {
+    font-size: 36px;
+    line-height: 1.11;
+    width: 50%;
+    margin-bottom: 16px;
+  }
+
+  .searchform__subtitle {
+    width: 59%;
+    font-size: 18px;
+    line-height: 1.33;
+    margin-left: 55px;
+    margin-bottom: 48px;
+  }
+
+  .searchform__input {
+    padding-left: 24px;
+    padding-right: 180px;
+    box-sizing: border-box;
+    width: 448px;
+    height: 56px;
+  }
+
+  .searchform__button {
+    height: 56px;
+    width: 160px;
+    margin-left: -159px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .searchform{
+    height: 500px;
+  } 
+  .searchform__input {
+    height: 56px;
+    width: 100%;
+    padding-right: 24px;
+  }
+
+  .searchform__button {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 16px;
+  }
+  .searchform__form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .searchform{
+    background-image: url(../../images/back-mobile.jpg);
+    height: 536px;
+  }
+
+  .searchform__title {
+    width: 90%;
+    padding-top: 30px;
+  }
+
+  .searchform__subtitle {
+    width: 90%;
+    margin-left: 0;
+    margin-bottom: 120px;
+  }
+
+  .searchform__input {
+    padding-left: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .searchform__button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .searchform__form {
+    margin-bottom: 32px;
+  }
+}
