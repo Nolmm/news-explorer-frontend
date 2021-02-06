@@ -16,7 +16,7 @@
 }
 
 .navigation__item {
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -43,7 +43,7 @@
   width: 112px;
   background-color: transparent;
   margin-right: 104px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px; 
@@ -89,7 +89,7 @@
   width: 176px;
   background-color: transparent;
   margin-right: 104px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px; 

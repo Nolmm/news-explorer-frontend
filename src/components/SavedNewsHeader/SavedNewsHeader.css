@@ -6,7 +6,7 @@
 
 .savednewsheader__title {
   color: rgba(26, 27, 34, 0.5);
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -15,7 +15,7 @@
 }
 
 .savednewsheader__subtitle {
-  font-family: 'Robotoslab';
+  font-family: 'Robotoslab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 40px;
@@ -26,7 +26,7 @@
 }
 
 .savednewsheader__keywords{
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;

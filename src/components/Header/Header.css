@@ -10,7 +10,7 @@
 }
 
 .header__logo {
-  font-family: 'RobotoSlab';
+  font-family: 'RobotoSlab', Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
@@ -37,7 +37,7 @@
 }
 
 .header__logo-main {
-  font-family: 'RobotoSlab';
+  font-family: 'RobotoSlab', Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
