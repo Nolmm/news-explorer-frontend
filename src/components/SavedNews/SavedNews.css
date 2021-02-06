@@ -1,0 +1,20 @@
+.savednews {
+  width: 100%;
+  padding: 62px 100px 62px 100px;
+  box-sizing: border-box;
+  background-color: #F5F6F7;
+}
+
+@media screen and (max-width: 888px) {
+  .savednews {
+    padding: 40px 32px 40px 32px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .savednews {
+  padding: 16px 24px 16px 24px;
+  }
+}
+
+

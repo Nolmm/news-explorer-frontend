@@ -1,0 +1,31 @@
+.newscard__list{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 16px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-width: 1232px;
+}
+
+@media screen and (max-width: 888px) {
+  .newscard__list {
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    gap: 8px;
+    max-width: 748px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .newscard__list {
+    max-width: 689px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .newscard__list {
+    row-gap: 10px;
+    align-self: center;
+    margin: 0;
+  }
+}

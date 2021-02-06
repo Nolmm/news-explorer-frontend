@@ -1,0 +1,126 @@
+.header {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  margin: 0;
+  flex-direction: row; 
+  justify-content: space-between; 
+  z-index: 1;
+  position: relative;
+}
+
+.header__logo {
+  font-family: 'RobotoSlab', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  margin-left: 104px;
+  padding: 0;
+  max-width: 200px;
+  color: rgba(26, 27, 34, 1)
+}
+
+
+
+.header_saved-news {
+  background: #fff;
+  box-shadow: inset 0px -1px 0px #d1d2d6;
+}
+
+.header_main {
+  color: #FFFFFF;
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+  background: rgba(196, 196, 196, 0.01);
+  z-index: 1;
+}
+
+.header__logo-main {
+  font-family: 'RobotoSlab', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  margin-left: 104px;
+  padding: 0;
+  max-width: 200px;
+  color: #FFFFFF;
+}
+
+.header__burger {
+  visibility: hidden;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  position: absolute;
+  left: 87.5%;
+  right: 5%;
+  top: 28.57%;
+  bottom: 28.57%;
+}
+
+.header__burger-img_white {
+  background-image: url(../../images/menu.svg);
+}
+
+.header__burger-img_black {
+  background-image: url(../../images/menu_black.svg);
+}
+
+.header__burger-close {
+  background-image: url(../../images/back.svg);
+}
+
+.header__link {
+  text-decoration: none;
+  color: inherit;
+  align-items: center;
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: 66px;
+  }
+
+  .header__logo-main { 
+    margin-left: 40px;
+  }
+
+  .header__logo { 
+    margin-left: 40px;
+}
+}
+
+@media screen and (max-width: 650px) {
+  
+  .header__logo-main {  
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: 16px;
+  }
+
+    .header__burger {
+      visibility: visible;
+    }
+  
+    .header__background {
+      background-color: #1A1B22;
+    }
+
+    .header__logo {
+      font-weight: bold;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-left: 16px;
+    }
+}
+
+

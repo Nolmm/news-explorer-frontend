@@ -1,0 +1,211 @@
+.newscard__conteiner {
+  border-radius: 16px;
+  max-width: 400px;
+}
+
+.newscard__figure {
+  border-radius: 16px;
+  max-width: 400px;
+  margin: 0;
+  position: relative;
+  height: 576px;
+}
+
+.newscard__link {
+  text-decoration: none;
+}
+
+.newscard__keyword {
+  display: flex;
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 10px;
+  top: 24px;
+  right: 288px;
+  width: 88px;
+  height: 40px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.71;
+  color: #000000;
+}
+
+.newscard__keyword_hidden {
+  display: none;
+}
+
+.newscard__trash {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-image: url(../../images/trash.svg);
+  border-radius: 8px;
+}
+
+.newscard__trash:hover {
+  cursor: pointer;
+  background-image: url(../../images/trash_hover.svg);
+}
+
+.newscard__trash:hover::before {
+  content: 'Убрать из сохранённых';
+  width: 159px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 45px;
+}
+
+.newscard__img{
+  max-width: 100%; 
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  object-position: center;
+}
+  .newscard__figcaption {
+    background-color: white;
+    border-radius:  0 0 16px 16px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px 24px 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    height: 53%;
+  }
+
+  .newscard__date {
+    color: #B6BCBF;
+    font-family: 'SourceSansPro', Arial, Helvetica, sans-serif;;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.33;
+    margin: 0;
+  }
+
+  .newscard__title {
+    font-family: 'Robotoslab', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 1.15;
+    color: #1A1B22;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow-y: hidden;
+  }
+
+  .newscard__text {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.37;
+    color: #1A1B22;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow-y: hidden;
+    margin: 0;
+    padding-top: 16px;
+    box-sizing: border-box;
+  }
+
+  .newscard__source {
+    font-family: 'Robotoslab', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #B6BCBF;
+  }
+
+  @media screen and (max-width: 888px) {
+
+    .newscard__figure {
+      max-width: 224px;
+      height: 420px;
+    }
+    
+    .newscard__keyword {
+      top: 8px;
+      right: 128px;
+    }
+    
+    .newscard__trash {
+      top: 8px;
+      right: 8px;
+    }
+    
+      .newscard__figcaption {
+        padding: 16px;
+        box-sizing: border-box;
+        justify-content: space-between;
+        height: 270px;
+      }
+
+      .newscard__title {
+        font-size: 22px;
+        line-height: 1.09;
+      }
+    
+      .newscard__text {
+        font-size: 16px;
+        line-height: 1.37;
+        padding-top: 10px;
+      }
+    
+      .newscard__source {
+        margin: 0;
+      }
+  }
+
+  @media screen and (max-width: 500px) {
+    .newscard__figure {
+      max-width: 100%;
+      height: 440px;
+    }
+
+    .newscard__figcaption {
+      height: 244px;
+    }
+
+    .newscard__img{
+      height: 196px;
+    }
+
+    .newscard__keyword {
+      top: 16px;
+      left: 16px;
+    }
+  }
+
