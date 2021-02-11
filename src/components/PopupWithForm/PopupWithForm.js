@@ -10,8 +10,8 @@ function PopupWithForm(props) {
         <form name={props.formName} className="popup__form" onSubmit={props.onSubmit}>
           <h2 className="popup__title">{props.title}</h2>
           {props.children}
-          <button type="submit" className="popup__submit-button">{props.buttonTitle}</button>
-          <p className="popup__or">или<Link onClick={props.onClick} className="popup__link" to={props.route}>{props.linkTitle}</Link></p>
+          
+          <p className="popup__or">или<Link onClick={props.onClick} className="popup__link">{props.linkTitle}</Link></p>
         </form>
       </div>
 

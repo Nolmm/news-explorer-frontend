@@ -7,12 +7,22 @@ import Preloader from '../Preloader/Preloader.js'
 import NotFound from '../NotFound/NotFound.js'
 
 
+//функция отрисовывает страницу в зависимости от запроса
+const renderContent = (data, search) => {
+  console.log(data)
+  if (search) return <Preloader />
+  if (data === null) return 
+  if (data.length === 0) return <NotFound />
+  return <Results data={data}/>
+}
+
+
 
 function Main(props) {
-  return (
+return (
 <section className="main">
-  <SearchForm />
-  {props.search ? <Results /> : props.notfound ? <Preloader /> : <NotFound />}
+  <SearchForm requestArticles={props.requestArticles}/>
+  {renderContent (props.data, props.search)}
   <About />
 </section>
   )
