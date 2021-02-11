@@ -1,5 +1,5 @@
 const url = 'http://api.nolmmnews.students.nomoreparties.space';
-
+// const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
 class MainApi {
     constructor({baseUrl, headers}) {
         this.baseUrl = baseUrl;
@@ -95,10 +95,9 @@ class MainApi {
 
 
 const mainApi = new MainApi({
-    baseUrl: url,
+    baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`,
     headers: {
         "Content-Type": "application/json",
-        'Accept': 'application/json',
     }
 })
 

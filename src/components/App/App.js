@@ -186,9 +186,10 @@ function handleLogout () {
             data={data}
             setData={setData}
             setSearch={setSearch}
+            theme={setheaderTheme}
           />
         </Route>
-        <ProtectedRoute
+        <ProtectedRoute exact
           path='/saved-news'
           component={SavedNews}
           loggedIn={loggedIn}

@@ -19,8 +19,12 @@ const renderContent = (data, search) => {
 
 
 function Main(props) {
+  React.useEffect(() => {
+    props.theme(false);
+  }, []);
 return (
 <section className="main">
+  
   <SearchForm requestArticles={props.requestArticles}/>
   {renderContent (props.data, props.search)}
   <About />
