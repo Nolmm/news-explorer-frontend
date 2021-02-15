@@ -3,9 +3,10 @@ import React from 'react';
 import useFormWithValidation from '../Validation/Validation.js';
 import {useRef} from 'react'
 
-function SearchForm({
-  onSubmit, requestArticles
-}) {
+function SearchForm(
+  // onSubmit, requestArticles
+  props
+) {
   const { values, handleChange } = useFormWithValidation();
   //показывает ошибку валидации
   const [visibleError, setVisibleErrorError] = React.useState(false);
@@ -25,12 +26,13 @@ function SearchForm({
   }
 
 const input = useRef(null);
+
    //поиск статей
   function find() {
-    requestArticles (input.current.value)
-    
+    props.requestArticles (input.current.value)
   }
 
+  
 
 
   
@@ -47,7 +49,9 @@ const input = useRef(null);
         placeholder={visibleError ? 'Нужно ввести ключевое слово' : 'Введите ключевое слово'}
         autoComplete="on" required 
         onChange={handleChange}
+        // keyword={input.current.value}
         onFocus={handleFocus}>
+          
         </input>
         <button className="searchform__button" onClick={find}>Искать</button>
       </form>

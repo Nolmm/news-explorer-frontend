@@ -21,7 +21,7 @@ function NewsCardList (props) {
 
   const [ index, setIndex ] = React.useState(6);
   const [ articles, setArticles ] = React.useState(props.data.slice(0, 3));
-
+  // const [saved, setSaved] = React.useState([]);
   
 
   
@@ -30,7 +30,13 @@ function NewsCardList (props) {
     setArticles(props.data.slice(0, index));
   }
 
+  
+
   React.useEffect(() => {
+    // const saved = localStorage.getItem('saved');
+    // if (saved) {
+    //   setSaved(JSON.parse(saved));
+    // }
     setArticles(props.data.slice(0, 3));
   }, [props.data])
   
@@ -38,15 +44,20 @@ function NewsCardList (props) {
     <div>
 <ul className="newscard__list">
   {articles.map(item => <NewsCard 
+    createArticle={props.createArticle}
     keyword={item.keyword} 
     image={item.urlToImage} 
     date={item.publishedAt} 
     title={item.title} 
     text={item.description} 
     source={item.source.name}
-    key={item.url}
+    // key={item.url}
     loggedIn={props.loggedIn}
     url={item.url}
+    // deleteArticle={props.deleteArticle}
+    key={item.id + 1} 
+    id={item.id}
+   
     />)}
  </ul>
 <div className="results__button_conteiner">

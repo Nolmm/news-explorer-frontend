@@ -60,8 +60,13 @@
   border-radius: 8px;
   background-image: url(../../images/bookmark.svg);
 }
+ 
 
-.results__bookmark:hover::before {
+
+
+/* .results__bookmark:hover::before  */
+.results__bookmark_not-loggedin:hover::before
+{
   content: 'Войдите, чтобы сохранять статьи';
   width: 182px;
   height: 40px;

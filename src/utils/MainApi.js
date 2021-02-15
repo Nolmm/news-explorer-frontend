@@ -1,4 +1,4 @@
-const url = 'http://api.nolmmnews.students.nomoreparties.space';
+const url = '';
 // const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
 class MainApi {
     constructor({baseUrl, headers}) {
@@ -19,6 +19,8 @@ class MainApi {
         })
             .then((res) => res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`));
     }
+
+    
 
     login(data) {
         return fetch(`${this.baseUrl}/signin`, {
@@ -95,10 +97,12 @@ class MainApi {
 
 
 const mainApi = new MainApi({
-    baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`,
+    baseUrl: 'http://api.nolmmnews.students.nomoreparties.space',
     headers: {
         "Content-Type": "application/json",
     }
 })
 
 export default mainApi;
+
+// `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3000'}`

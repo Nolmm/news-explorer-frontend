@@ -26,7 +26,10 @@ function Results(props) {
     
     <section className="results">
       <h2 className="results__title">Результаты поиска</h2>
-      <NewsCardList data={props.data} />
+      <NewsCardList data={props.data} createArticle={props.createArticle} deleteArticle={props.deleteArticle} loggedIn={props.loggedIn} 
+      id={props.id}
+      />
+      
       {/* <div className="results__button_conteiner">
       <button className="results__button">Показать еще</button>
       </div> */}

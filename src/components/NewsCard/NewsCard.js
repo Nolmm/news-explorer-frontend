@@ -2,8 +2,10 @@ import './NewsCard.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 function NewsCard(props) {
   const [isMarked, setIsMarked] = React.useState(false);
+  
   // функция для отметки карты сохраненной
   function handleSetmarkedClick() {
     setIsMarked(!isMarked);
@@ -16,11 +18,55 @@ function NewsCard(props) {
     return correctDate;
   }
 
+  function savedArticles() {
+    props.createArticle({
+      keyword: props.keyword,
+      title: props.title,
+      text: props.text,
+      date: props.date,
+      source: props.source,
+      link: props.url,
+      image: props.image
+    })
+    handleSetmarkedClick()
+  }
+
+  React.useEffect(() => {
+    const savedArticle = JSON.parse(localStorage.getItem('saved'));
+    if (!savedArticle) return;
+    if (savedArticle.find(item => item === props.id)) {
+      handleSetmarkedClick();
+    }
+  }, [])
+  
+
+
+const deleteArticle = () => {
+ 
+  props.deleteArticle(props.id)
+    .then((res) => {
+      console.log(res);
+      props.data((array) => {
+        const result = array.filter(item => item !== props.id);
+        localStorage.removeItem('saved');
+        localStorage.setItem('saved', JSON.stringify(result));
+        return result;
+      })
+      handleSetmarkedClick();
+    })
+    .catch(err => console.log(err))
+}
+  
   return (
-    <li className="newscard__conteiner">
-        <div className={`${props.loggedIn ? 'newscard__keyword' : 'newscard__keyword_hidden'}`}>{props.keyword}</div>
-        {props.loggedIn ? <button type="reset" className="newscard__trash"></button> :
-          <button type="button" className={`results__bookmark ${isMarked ? 'results__bookmark-marked' : ''}`} onClick={handleSetmarkedClick}></button>}
+    <li className="newscard__conteiner" id={props.id}>
+<div className={`${props.loggedIn && props.saved ? 'newscard__keyword' : 'newscard__keyword_hidden'}`}>{props.keyword}</div>
+          {props.saved ? 
+           <button type="reset" className="newscard__trash" onClick={() => props.deleteArticle(props.id)}></button> 
+           : props.loggedIn ? 
+           <button type="button" className={`results__bookmark ${isMarked ? 'results__bookmark-marked' : ''}`} 
+           onClick={isMarked ? deleteArticle :  savedArticles}></button> : 
+           <button className="results__bookmark results__bookmark_not-loggedin"></button>
+          }
         <Link target='_blank'
         rel='noreferrer'
         href={props.url} 

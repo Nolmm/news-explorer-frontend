@@ -53,6 +53,19 @@ padding-bottom: 10px;
   margin: 5px 0 13px;
 }
 
+/* переименовать */
+.popup__error_button {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.popup__error_input {
+  position: absolute;
+  left: 0;
+  top: 50px;
+}
+
 @media screen and (max-width: 580px) {
   .popup__input {
   width: 288px;

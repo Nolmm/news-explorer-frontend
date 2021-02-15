@@ -11,7 +11,7 @@ function PopupWithForm(props) {
           <h2 className="popup__title">{props.title}</h2>
           {props.children}
           
-          <p className="popup__or">или<Link onClick={props.onClick} className="popup__link">{props.linkTitle}</Link></p>
+          
         </form>
       </div>
 

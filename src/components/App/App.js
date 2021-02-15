@@ -23,7 +23,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 function App() {
 
   //переменная состояния для хедера закомментировать для просмотра хедера по роуту /saved-news
-  const [headerTheme, setheaderTheme] = React.useState(true);
+  const [headerTheme, setheaderTheme] = React.useState(false);
 
   // закомментировать для корректной отрисовки карточек по роуту /saved-news
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -36,15 +36,28 @@ function App() {
   //в таком виде отображает карточки, закомментировать чтобы посмотреть прелоадер или нот фаунд
   const [search, setSearch] = React.useState(false);
 
-
   const [data, setData] = React.useState(null);
+  // const [data, setData] = React.useState(JSON.parse(localStorage.getItem('news')) || null);;
+  
+  
+  const [authError, setAuthError] = React.useState({
+    register: '',
+    login: '',
+  });
 
+  
   //запрос к апи
   const requestArticles = (keyword) => {
     setSearch(true)
     newsApi.getArticles(keyword)
       .then(res => {
-        setData(res.articles)
+        const arrayWithKeywords =res.articles.map(item => {
+            item.keyword = keyword
+            //когда будет время внести сюда остальные параметры из ответа и сделать как для записи в базу
+
+            return item
+          });
+        setData( arrayWithKeywords)
       })
       .finally(_ => {
         setSearch(false)
@@ -109,6 +122,10 @@ function App() {
     setIsPopupLoginOpen(false);
     setIsInfoTooltipopen(false);
     setMobileOpen(false);
+    setAuthError({
+      register: '',
+      login: '',
+    });
     // setTooltip({
     //   ...tooltip,
     //   isOpen: false
@@ -138,32 +155,70 @@ function App() {
   }, []);
 
   function handleRegister (data) {
+    setAuthError({
+      register: '',
+      login: '',
+    });
     mainApi.register({
       password: data.password,
       email: data.email,
       name: data.name
     })
-    .then((res) => {
-        console.log(res);
+    .then(() => {
+      closeAllPopups();
         setIsInfoTooltipopen(true);
         history.push('/');
     })
-    .catch((err) => 
-        console.log(err)
-    )
+    // .catch((err) => 
+    //     console.log(err)
+    // )
+    .catch((err) => {
+      setAuthError({
+        ...authError, register: err.message,
+       
+      });
+    });
 }
 
+// function handleRegister(data) {
+//   mainApi.register(data)
+
+//     .then(() => {
+//       closeAllPopups();
+//       setIsInfoTooltipopen(true);
+//     })
+//     console.log(data)
+//     // .catch((err) => {
+//     //   setIsPopupLoading(false);
+//     //   setAuthError({
+//     //     ...authError, register: err.message,
+//     //   });
+//     // });
+//     .catch((err) => 
+//             console.log(err))
+// }
+
 function handleLogin (data) {
+  setAuthError({
+    register: '',
+    login: '',
+  });
   mainApi.login({
       password: data.password,
       email: data.email
   })
   .then((res) => {
       localStorage.setItem('jwt', res.token);
+      closeAllPopups();
       setLoggedIn(true);
-      history.push('/saved-news')
+      // history.push('/saved-news')
   })
-  .catch((err) => console.log(err))
+  .catch((err) => {
+    setAuthError({
+      ...authError, register: err.message,
+     
+    });
+  });
 }
 function handleLogout () {
   localStorage.removeItem('jwt');
@@ -171,13 +226,85 @@ function handleLogout () {
   history.push('/');
 }
 
+//сохранение статьи
+// const [articles, setArticles] = React.useState([]);
 
 
+
+// function createArticle(data) {
+//   mainApi.createArticle({
+//     keyword: data.keyword,
+//     title: data.title,
+//     text: data.text,
+//     date: data.date,
+//     source: data.source,
+//     link: data.link,
+//     image: data.image})
+//   .then((newCard) => {
+//     setArticles([newCard, ...articles]);
+//     console.log(newCard)
+//   })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }
+
+// const createArticle = (data) => {
+//   return mainApi.createArticle({
+//     keyword: data.keyword,
+//     title: data.title,
+//     text: data.text,
+//     date: data.date,
+//     source: data.source,
+//     link: data.link,
+//     image: data.image})
+//   }
+
+
+//переименовать
+const [id, setId] = React.useState('');
+  function createArticle(data) {
+    const newArticles = savedArticles;
+    mainApi.createArticle(data)
+      .then((res) => {
+        newArticles.push(res);
+        setSavedArticles(newArticles);
+        setId(res._id);
+       
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  // function deleteArticle(id){
+  //    mainApi.deleteArticle(id);filter(item => item !== props.id);
+  // }
+  // function deleteArticle(id) {
+  //   mainApi.deleteArticle(id)
+  //   .then(() => {
+  //     const newArticles = savedArticles.filter(item => item !== id);;
+  //     setSavedArticles(newArticles);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+  // }
+
+  const deleteArticleRequest = (id) => {
+    return mainApi.deleteArticle(id);
+  }
+// стэйт для сохранённых новостей
+const [ savedArticles, setSavedArticles ] = React.useState([]);
+// React.useState([]);
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
-      <Header isOpenMob={mobileOpen} theme={headerTheme} loggedIn={loggedIn} onClick={handlePopupRegisterClick}
+      <Header isOpenMob={mobileOpen} 
+      theme={headerTheme} 
+      loggedIn={loggedIn} 
+      onClick={handlePopupLoginClick}
         open={handlemobileOpenClick}
+        handleLogout={handleLogout}
       />
       <Switch>
         <Route exact path='/'>
@@ -187,27 +314,48 @@ function handleLogout () {
             setData={setData}
             setSearch={setSearch}
             theme={setheaderTheme}
+            articles={savedArticles}
+            createArticle={createArticle}
+            // keyword={keyword}
+            // setArticles={setArticles}
+            deleteArticle={deleteArticleRequest}
+            loggedIn={loggedIn} 
+            saved={savedArticles}
+            id={id}
           />
         </Route>
         <ProtectedRoute exact
           path='/saved-news'
           component={SavedNews}
           loggedIn={loggedIn}
+          theme={setheaderTheme}
+          //переименовать
+          data={data}
+            // setData={setData}
+          articles={savedArticles}
+          saved={savedArticles}
+          setSaved={setSavedArticles}
+          id={id}
+          deleteArticle={deleteArticleRequest}
           />
           
       </Switch>
       <PopupRegister
         // onPopupRegister={handlePopupRegisterClick} 
         isOpen={isPopupRegisterOpen}
-        onClose={closeAllPopups} onClick={handlePopupLoginClick} onSubmit={handleRegister} />
+        onClose={closeAllPopups} onClick={handlePopupLoginClick} handleRegister={handleRegister} onLogin={handlePopupLoginClick} 
+        error={authError}
+        />
       <PopupLogin isOpen={isPopupLoginOpen}
-        onClose={closeAllPopups} onSubmit={handleLogin} 
-        // onInfoTooltip={handleInfoTooltiClick} 
+        onClose={closeAllPopups} handleLogin={handleLogin} onRegister={handlePopupRegisterClick}
+        error={authError}
         />
       <InfoTooltip 
-      // isOpen={tooltip}
-      isOpen={isInfoTooltipopen}
-        onClose={closeAllPopups} />
+        onLogin={handlePopupLoginClick}
+        isOpen={isInfoTooltipopen}
+        onClose={closeAllPopups}
+        onClick={isPopupLoginOpen}
+         />
       <Footer />
       </CurrentUserContext.Provider>
     </div>

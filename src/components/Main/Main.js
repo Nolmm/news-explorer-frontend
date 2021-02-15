@@ -8,12 +8,11 @@ import NotFound from '../NotFound/NotFound.js'
 
 
 //функция отрисовывает страницу в зависимости от запроса
-const renderContent = (data, search) => {
-  console.log(data)
+const renderContent = (data, search, createArticle, deleteArticle, loggedIn, id) => {
   if (search) return <Preloader />
   if (data === null) return 
   if (data.length === 0) return <NotFound />
-  return <Results data={data}/>
+  return <Results data={data} createArticle={createArticle} deleteArticle={deleteArticle} loggedIn={loggedIn} id={id}/>
 }
 
 
@@ -22,11 +21,14 @@ function Main(props) {
   React.useEffect(() => {
     props.theme(false);
   }, []);
+
+  
 return (
 <section className="main">
   
   <SearchForm requestArticles={props.requestArticles}/>
-  {renderContent (props.data, props.search)}
+  {renderContent (props.data, props.search, props.createArticle, props.deleteArticle, props.loggedIn, props.id)}
+  
   <About />
 </section>
   )
