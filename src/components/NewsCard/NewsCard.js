@@ -41,30 +41,17 @@ function NewsCard(props) {
   
 
 
-const deleteArticle = () => {
- 
-  props.deleteArticle(props.id)
-    .then((res) => {
-      console.log(res);
-      props.data((array) => {
-        const result = array.filter(item => item !== props.id);
-        localStorage.removeItem('saved');
-        localStorage.setItem('saved', JSON.stringify(result));
-        return result;
-      })
-      handleSetmarkedClick();
-    })
-    .catch(err => console.log(err))
-}
+
   
   return (
     <li className="newscard__conteiner" id={props.id}>
 <div className={`${props.loggedIn && props.saved ? 'newscard__keyword' : 'newscard__keyword_hidden'}`}>{props.keyword}</div>
           {props.saved ? 
-           <button type="reset" className="newscard__trash" onClick={() => props.deleteArticle(props.id)}></button> 
+           <button type="reset" className="newscard__trash" onClick={props.onCardDelete}></button> 
            : props.loggedIn ? 
            <button type="button" className={`results__bookmark ${isMarked ? 'results__bookmark-marked' : ''}`} 
-           onClick={isMarked ? deleteArticle :  savedArticles}></button> : 
+           onClick={savedArticles}></button> 
+           : 
            <button className="results__bookmark results__bookmark_not-loggedin"></button>
           }
         <Link target='_blank'

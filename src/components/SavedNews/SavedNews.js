@@ -27,6 +27,22 @@ function SavedNews(props) {
 
   // }
 
+  const deleteArticle = () => {
+
+    props.deleteArticle(props.id)
+      .then((res) => {
+        console.log(res);
+        props.saved((array) => {
+          const result = array.filter(el => el._id !== props.id);
+          localStorage.removeItem('saved');
+          localStorage.setItem('saved', JSON.stringify(result));
+          return result;
+        })
+       
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <section className="savednews">
       <SavedNewsHeader articles={props.articles}/>
@@ -44,8 +60,8 @@ function SavedNews(props) {
       text={el.text} 
       source={el.source}
       saved={props.saved}
-      deleteArticle={props.deleteArticle}
-      data={props.data}
+      // deleteArticle={props.deleteArticle}
+      onCardDelete={() => deleteArticle(el.id)}
       />)}
       </ul>
       {/* <NewsCardList loggedIn={props.loggedIn} data={props.data}/> */}

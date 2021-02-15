@@ -270,12 +270,14 @@ const [id, setId] = React.useState('');
         newArticles.push(res);
         setSavedArticles(newArticles);
         setId(res._id);
-       
+        console.log(res._id)
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+
   // function deleteArticle(id){
   //    mainApi.deleteArticle(id);filter(item => item !== props.id);
   // }
@@ -293,6 +295,8 @@ const [id, setId] = React.useState('');
   const deleteArticleRequest = (id) => {
     return mainApi.deleteArticle(id);
   }
+
+  
 // стэйт для сохранённых новостей
 const [ savedArticles, setSavedArticles ] = React.useState([]);
 // React.useState([]);
@@ -336,6 +340,7 @@ const [ savedArticles, setSavedArticles ] = React.useState([]);
           saved={savedArticles}
           setSaved={setSavedArticles}
           id={id}
+          setId={setId}
           deleteArticle={deleteArticleRequest}
           />
           
