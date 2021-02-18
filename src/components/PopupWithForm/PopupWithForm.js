@@ -1,6 +1,6 @@
 import './PopupWithForm.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 
 function PopupWithForm(props) {
   return (
@@ -10,8 +10,6 @@ function PopupWithForm(props) {
         <form name={props.formName} className="popup__form" onSubmit={props.onSubmit}>
           <h2 className="popup__title">{props.title}</h2>
           {props.children}
-          
-          
         </form>
       </div>
 

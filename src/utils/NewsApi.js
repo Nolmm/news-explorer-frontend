@@ -10,22 +10,23 @@ class NewsApi {
 
   getArticles(keyword) {
     const date = new Date();
-    date.setDate(date.getDate() - 1);
-    const dateStart = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    const dateStart = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const sevenDays = date.getDate() - 7;
+    date.setDate(sevenDays);
     const dateEnd = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
-    return fetch(`${this.baseUrl}?language=ru&q=${keyword}&from=${dateStart}&to=${dateEnd}&pageSize=100&apiKey=${this.apiKey}`, {
+    return fetch(`${this.baseUrl}?language=ru&q=${keyword}&from=${dateEnd}&to=${dateStart}&pageSize=100&apiKey=${this.apiKey}`, {
       method: 'GET', 
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(new Error(`Ошибка: ${res.status}`));
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(new Error(`Ошибка: ${res.status}`));
+    });
   }
 }
 
@@ -36,7 +37,3 @@ const newsApi = new NewsApi({
 export default newsApi;
 
 
-
-// key: c5bc199947a34a7096759ba544e69356
-
-// https://nomoreparties.co/news/v2/top-headlines?country=us&apiKey=[ваш_ключ] 

@@ -8,7 +8,6 @@ function Preloader() {
         <p className="preloader__title">Идет поиск новостей...</p>
     </section>
   )
-  
 }
 
 export default Preloader

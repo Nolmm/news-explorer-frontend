@@ -1,41 +1,29 @@
 import './SearchForm.css';
 import React from 'react';
 import useFormWithValidation from '../Validation/Validation.js';
-import {useRef} from 'react'
+import { useRef } from 'react'
 
-function SearchForm(
-  // onSubmit, requestArticles
-  props
-) {
+function SearchForm(props) {
   const { values, handleChange } = useFormWithValidation();
   //показывает ошибку валидации
   const [visibleError, setVisibleErrorError] = React.useState(false);
+  const input = useRef(null);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     if (!values.searchformInput) {
       setVisibleErrorError(true);
-    } 
-    // else {
-    //   onSubmit(input.current.value);
-    // }
+    }
   }
 
   function handleFocus() {
     setVisibleErrorError(false);
   }
 
-const input = useRef(null);
-
-   //поиск статей
-  function find() {
-    props.requestArticles (input.current.value)
+  //поиск статей
+  function findArticles() {
+    props.requestArticles(input.current.value)
   }
-
-  
-
-
-  
 
   return (
     <section className="searchform">
@@ -43,17 +31,15 @@ const input = useRef(null);
       <p className="searchform__subtitle">Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.</p>
       <form className="searchform__form" onSubmit={handleSubmit} noValidate>
         <input
-        ref={input}
-        name="searchformInput"
-        className={`searchform__input ${visibleError ? 'searchform__input_error' : ''}`}
-        placeholder={visibleError ? 'Нужно ввести ключевое слово' : 'Введите ключевое слово'}
-        autoComplete="on" required 
-        onChange={handleChange}
-        // keyword={input.current.value}
-        onFocus={handleFocus}>
-          
+          ref={input}
+          name="searchformInput"
+          className={`searchform__input ${visibleError ? 'searchform__input_error' : ''}`}
+          placeholder={visibleError ? 'Нужно ввести ключевое слово' : 'Введите ключевое слово'}
+          autoComplete="on" required
+          onChange={handleChange}
+          onFocus={handleFocus}>
         </input>
-        <button className="searchform__button" onClick={find}>Искать</button>
+        <button className="searchform__button" onClick={findArticles}>Искать</button>
       </form>
     </section>
   )

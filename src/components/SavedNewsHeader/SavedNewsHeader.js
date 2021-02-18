@@ -7,21 +7,21 @@ function SavedNewsHeader (props) {
   const [ keywords, setKeywords ] = React.useState([]);
 
   React.useEffect(() => {
-    setKeywords(sortByFrequency(props.articles.map(el => el.keyword[0].toUpperCase() + el.keyword.slice(1))));
+    setKeywords(selectByQuantity(props.articles.map(el => el.keyword[0].toUpperCase() + el.keyword.slice(1))));
   }, [props.articles])
 
-  const sortByFrequency = (arr) => {
-    const frequency = {};
-    arr.forEach((item) => frequency[item] = 0);
-    const uniques = arr.filter((item) => ++frequency[item] === 1);
-    return uniques.sort((a, b) => frequency[b] - frequency[a]);
+  const selectByQuantity = (arr) => {
+    const quantity = {};
+    arr.forEach((item) => quantity[item] = 0);
+    const uniquesKeyword = arr.filter((item) => ++quantity[item] === 1);
+    return uniquesKeyword.sort((a, b) => quantity[b] - quantity[a]);
   }
 
-  function declOfNum(number, titles) {
+  function sortNum(number, titles) {
     const cases = [2, 0, 1, 1, 1, 2];
     return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
   }
-  const savedText = declOfNum(props.articles.length, ['сохранённая статья', 'сохранённые статьи', 'сохранённых статей']);
+  const savedText = sortNum(props.articles.length, ['сохранённая статья', 'сохранённые статьи', 'сохранённых статей']);
   return (
     <section className="savednewsheader">
       <h2 className="savednewsheader__title">Сохранённые статьи</h2>

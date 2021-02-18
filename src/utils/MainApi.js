@@ -1,13 +1,14 @@
-const url = '';
 // const baseUrl = `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`
+
 class MainApi {
-    constructor({baseUrl, headers}) {
+    constructor({ baseUrl, headers }) {
         this.baseUrl = baseUrl;
         this.headers = headers;
     }
 
 
     register(data) {
+
         return fetch(`${this.baseUrl}/signup`, {
             method: 'POST',
             headers: this.headers,
@@ -17,10 +18,15 @@ class MainApi {
                 name: data.name
             })
         })
-            .then((res) => res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`));
-    }
+            .then((res) => {
+                if (!res.ok) {
+                    return res.text()
+                        .then((text) => Promise.reject(new Error(JSON.parse(text).message)));
+                }
+                return res.json();
+            });
 
-    
+    }
 
     login(data) {
         return fetch(`${this.baseUrl}/signin`, {
@@ -31,7 +37,13 @@ class MainApi {
                 email: data.email
             })
         })
-            .then((res) => res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`));
+            .then((res) => {
+                if (!res.ok) {
+                    return res.text()
+                        .then((text) => Promise.reject(new Error(JSON.parse(text).message)));
+                }
+                return res.json();
+            });
     }
 
     getToken() {
@@ -46,11 +58,21 @@ class MainApi {
             .then(res => res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`));
     }
 
-    
-
     getArticles() {
         const jwt = localStorage.getItem('jwt');
         return fetch(`${this.baseUrl}/articles`, {
+            method: 'GET',
+            headers: {
+                ...this.headers,
+                "Authorization": `Bearer ${jwt}`
+            }
+        })
+            .then(res => res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`));
+    }
+
+    getUserMe() {
+        const jwt = localStorage.getItem('jwt');
+        return fetch(`${this.baseUrl}/users/me`, {
             method: 'GET',
             headers: {
                 ...this.headers,
@@ -93,8 +115,6 @@ class MainApi {
             .then(res => res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`))
     }
 }
-
-
 
 const mainApi = new MainApi({
     baseUrl: 'http://api.nolmmnews.students.nomoreparties.space',

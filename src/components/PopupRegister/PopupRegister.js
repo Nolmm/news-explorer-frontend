@@ -4,23 +4,6 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm.js'
 import useFormWithValidation from '../Validation/Validation.js'
 
 function PopupRegister(props) {
-  // const [email, setEmail] = React.useState('');
-  //   const [password, setPassword] = React.useState('');
-  //   const [name, setName] = React.useState('');
-  //   function onSubmit() {
-  //     props.onSubmit({
-  //         password: password,
-  //         email: email,
-  //         name: name
-  //     })
-  // } 
-  //смена попапа
-  function popupToggle() {
-    props.onClose();
-    props.onLogin();
-  }
-
-
   const {
     values,
     handleChange,
@@ -42,9 +25,15 @@ function PopupRegister(props) {
     resetForm();
   }, [props.isOpen]);
 
+  //смена попапа
+  function popupToggle() {
+    props.onClose();
+    props.onLogin();
+  }
+
   return (
     <PopupWithForm name="register" title="Регистрация" formName="register-form"
-      
+
       onClick={props.onClick} isOpen={props.isOpen} onPopupRegister={props.onPopupRegister}
       onClose={props.onClose} onSubmit={handleSubmit}
     >
@@ -58,7 +47,7 @@ function PopupRegister(props) {
       <input onChange={handleChange} value={values.name || ''} type="text" className="popup__input" placeholder="Введите своё имя" required name="name" minLength="3" maxLength="9"></input>
       <span className="popup__error">{errors.name}</span>
       <span className="popup__error popup__error_button">{props.error.register}</span>
-      <button type="submit" className={`${!isValid ?  'popup__submit-button_disabled' : 'popup__submit-button'}`}  disabled= {!isValid} 
+      <button type="submit" className={`${!isValid ? 'popup__submit-button_disabled' : 'popup__submit-button'}`} disabled={!isValid}
       >Зарегистрироваться</button>
       <p className="popup__or">или<span onClick={popupToggle} className="popup__link">Войти</span></p>
     </PopupWithForm>
