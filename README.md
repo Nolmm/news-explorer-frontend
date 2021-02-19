@@ -1,2 +1,3 @@
-Домен для фронт части 
-<nolmmnews.students.nomoreparties.space>
+# Домен для фронт части 
+
+http://nolmmnews.students.nomoreparties.space/
