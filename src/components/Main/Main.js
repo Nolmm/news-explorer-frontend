@@ -7,11 +7,11 @@ import Preloader from '../Preloader/Preloader.js'
 import NotFound from '../NotFound/NotFound.js'
 
 //функция отрисовывает страницу в зависимости от запроса
-const renderContent = (data, search, createArticle, deleteArticle, loggedIn, id, onClick, handleSetmarkedClick, isMarked) => {
+const renderContent = (data, search, createArticle, deleteArticle, loggedIn, id, onClick, setSaved) => {
   if (search) return <Preloader />
   if (data === null) return
   if (data.length === 0) return <NotFound />
-  return <Results data={data} createArticle={createArticle} deleteArticle={deleteArticle} loggedIn={loggedIn} id={id} onClick={onClick} handleSetmarkedClick={handleSetmarkedClick} isMarked={isMarked}/>
+  return <Results data={data} createArticle={createArticle} deleteArticle={deleteArticle} loggedIn={loggedIn} id={id} onClick={onClick} setSaved={setSaved}/>
 }
 
 function Main(props) {
@@ -22,7 +22,7 @@ function Main(props) {
   return (
     <section className="main">
       <SearchForm requestArticles={props.requestArticles}/>
-      {renderContent(props.data, props.search, props.createArticle, props.deleteArticle, props.loggedIn, props.id, props.onClick, props.handleSetmarkedClick, props.isMarked)}
+      {renderContent(props.data, props.search, props.createArticle, props.deleteArticle, props.loggedIn, props.id, props.onClick, props.setSaved )}
       <About />
     </section>
   )

@@ -11,18 +11,49 @@ function NewsCard(props) {
     return correctDate;
   }
 
+ 
+  // function clickOnArticleButton(evt) {
+  //   if (evt.target.classList.contains('results__bookmark') && props.loggedIn) {
+  //       setIsMarked(true)
+  //       props.addArticleClick(props.id)
+  //   } 
+  //   if (evt.target.classList.contains('results__bookmark-marked') && props.loggedIn) {
+  //     setIsMarked(false)
+  //     props.onDelete(props.id)
+  //   }
+  // }
+  
+
+  // React.useEffect(() => {
+  //   const savedArticle = JSON.parse(localStorage.getItem('saved'));
+  //   if (!savedArticle) return;
+  //   if (savedArticle.find(item => item === props.id)) {
+  //     setCardMarked();
+  //   }
+  // }, [])
 
   function clickOnArticleButton(evt) {
+    if (evt.target.classList.contains('results__bookmark-marked') && props.loggedIn) {
+      setIsMarked(false)
+      return props.onDelete(props.id)
+    }
     if (evt.target.classList.contains('results__bookmark') && props.loggedIn) {
         setIsMarked(true)
         props.addArticleClick(props.id)
     } 
-    if (evt.target.classList.contains('results__bookmark-marked') && props.loggedIn) {
-      setIsMarked(false)
-      props.onDelete(props.id)
-    }
   }
 
+  
+
+  React.useEffect(() => {
+    // if (!props.id) return
+    if (!props.id) {
+      setIsMarked(true)
+    }
+  },
+    
+  []);
+  
   return (
     <li className="newscard__conteiner" >
       <div className={`${props.loggedIn && props.saved ? 'newscard__keyword' : 'newscard__keyword_hidden'}`}>{props.keyword}</div>

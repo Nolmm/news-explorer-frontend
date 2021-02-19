@@ -22,7 +22,8 @@ function App() {
   //показывает прелоадер
   const [search, setSearch] = React.useState(false);
   //данные от ньюс апи
-  const [data, setData] = React.useState(null);
+  // const [data, setData] = React.useState(null);
+  const [articles, setArticles] = React.useState(null);
   //для серверных ошибок
   const [authError, setAuthError] = React.useState({
     register: '',
@@ -51,7 +52,7 @@ function App() {
           item.keyword = keyword
           return item
         });
-        setData(arrayWithKeywords)
+        setArticles(arrayWithKeywords)
         localStorage.setItem('Search', JSON.stringify(arrayWithKeywords))
         // localStorage.getItem('Saved')
       })
@@ -72,7 +73,7 @@ function App() {
             email: res.email,
           });
           const news = (JSON.parse(localStorage.getItem(('Search'))))
-          setData(news)
+          setArticles(news)
           
         })
 
@@ -191,6 +192,10 @@ function App() {
       .catch(err => console.log(err))
   }, [loggedIn])
 
+
+
+
+
   //сохранение статьи
   function createArticle(data) {
     const newArticles = savedArticles;
@@ -198,14 +203,36 @@ function App() {
       .then((res) => {
         newArticles.push(res);
         setSavedArticles(newArticles);
-        // localStorage.setItem('Saved', JSON.stringify(setData))
         setId(res._id);
-
+        const Saved = articles.filter((item) => item._id)
+        const newArr = articles.map((item) => {
+          item._id = res._id
+          item.Saved = Saved
+          return item
+        });
+          
+        console.log(newArr)
+        setArticles(newArr)
       })
+      //   const Saved = articles.map((item) => {
+      //     articles.filter((item) => item._id)
+          
+      //     item._id = res._id
+          
+      //     return item
+          
+      //   });
+      //   console.log(Saved)
+      //   setArticles(Saved)
+      // })
       .catch((err) => {
         console.log(err);
       });
   }
+      
+  
+
+  
 
   //удаление из сохраненных
   const deleteArticleRequest = (id) => {
@@ -232,8 +259,8 @@ function App() {
           <Route exact path='/'>
             <Main search={search}
               requestArticles={requestArticles}
-              data={data}
-              setData={setData}
+              data={articles}
+              setData={setArticles}
               setSearch={setSearch}
               theme={setheaderTheme}
               articles={savedArticles}
@@ -241,6 +268,7 @@ function App() {
               deleteArticle={deleteArticleRequest}
               loggedIn={loggedIn}
               saved={savedArticles}
+              setSaved={setSavedArticles}
               id={id}
               onClick={handlePopupLoginClick}
               // handleSetmarkedClick={handleSetmarkedClick}
@@ -253,7 +281,7 @@ function App() {
             component={SavedNews}
             loggedIn={loggedIn}
             theme={setheaderTheme}
-            data={data}
+            data={articles}
             articles={savedArticles}
             saved={savedArticles}
             setSaved={setSavedArticles}

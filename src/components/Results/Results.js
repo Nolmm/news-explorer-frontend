@@ -12,9 +12,8 @@ function Results(props) {
         deleteArticle={props.deleteArticle}
         loggedIn={props.loggedIn}
         id={props.id} onClick={props.onClick}
-        handleSetmarkedClick={props.handleSetmarkedClick}
-        isMarked={props.isMarked}
         
+        setSaved={props.setSaved}
       />
     </section>
   )

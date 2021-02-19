@@ -26,9 +26,9 @@ function NewsCardList(props) {
         image: articles[articleId].urlToImage,
         keyword : articles[articleId].keyword
     })
-    // localStorage.setItem('Saved', JSON.stringify(setArticles))
-    // localStorage.getItem('Saved', JSON.stringify(setArticles))
-}
+   
+  }
+    
 
   function deleteArticle(id) {
     props.deleteArticle(props.id)
@@ -39,8 +39,9 @@ function NewsCardList(props) {
     <div>
       <ul className="newscard__list">
         {articles.map((item, index) => <NewsCard
+          succes={item.succes}
           id={index}
-          key={item._id}
+          key={item.url}
           keyword={item.keyword}
           image={item.urlToImage}
           date={item.publishedAt}
@@ -52,7 +53,11 @@ function NewsCardList(props) {
           onClick={props.onClick}
           onDelete={() => deleteArticle(item.id)}
           addArticleClick={addArticleClick}
-          // articles={articles}
+          // newsItem={item}
+         
+          // isSaved={isSaved(item)}
+          setArticles={setArticles}
+          createArticle={props.createArticle}
         />)}
       </ul>
       <div className="results__button_conteiner">
