@@ -13,7 +13,6 @@ function SavedNews(props) {
 
   function deleteArticle(id) {
     props.deleteArticle(id)
-    
   }
 
   
@@ -29,6 +28,7 @@ function SavedNews(props) {
             keyword={el.keyword}
             image={el.image}
             date={el.date}
+            savedNews
             url={el.link}
             title={el.title}
             text={el.text}

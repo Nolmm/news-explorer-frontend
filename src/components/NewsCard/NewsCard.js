@@ -2,8 +2,6 @@ import './NewsCard.css';
 import React from 'react';
 
 function NewsCard(props) {
-  const [isMarked, setIsMarked] = React.useState(false);
-
   // меняет формат даты, приходящей от ньюс апи
   const changeDateformat = (item) => {
     const dateArticle = new Date(item);
@@ -34,33 +32,29 @@ function NewsCard(props) {
 
   function clickOnArticleButton(evt) {
     if (evt.target.classList.contains('results__bookmark-marked') && props.loggedIn) {
-      setIsMarked(false)
       return props.onDelete(props.id)
     }
     if (evt.target.classList.contains('results__bookmark') && props.loggedIn) {
-        setIsMarked(true)
-        props.addArticleClick(props.id)
+        props.addArticleClick({
+          title: props.title,
+          text: props.text,
+          date: props.date,
+          source: props.source,
+          link: props.url,   
+          image: props.image,
+          keyword: props.keyword
+      })
     } 
   }
 
   
-
-  React.useEffect(() => {
-    // if (!props.id) return
-    if (!props.id) {
-      setIsMarked(true)
-    }
-  },
-    
-  []);
-  
   return (
     <li className="newscard__conteiner" >
-      <div className={`${props.loggedIn && props.saved ? 'newscard__keyword' : 'newscard__keyword_hidden'}`}>{props.keyword}</div>
-      {props.saved ?
+      <div className={`${props.loggedIn && props.id && props.savedNews ? 'newscard__keyword' : 'newscard__keyword_hidden'}`}>{props.keyword}</div>
+      {props.id && props.savedNews ?
         <button type="reset" className="newscard__trash" onClick={props.onCardDelete}></button>
         : props.loggedIn ?
-          <button type="button" className={`results__bookmark ${isMarked ? 'results__bookmark-marked' : ''}`}
+          <button type="button" className={`results__bookmark ${props.id ? 'results__bookmark-marked' : ''}`}
             onClick={clickOnArticleButton}></button>
           :
           <button className="results__bookmark results__bookmark_not-loggedin" onClick={props.onClick}></button>
@@ -86,4 +80,4 @@ function NewsCard(props) {
   )
 
 }
-export default NewsCard;
+export default NewsCard

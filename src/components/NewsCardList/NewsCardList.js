@@ -16,23 +16,14 @@ function NewsCardList(props) {
   }, [props.data])
 
 
-  function addArticleClick(articleId) {
-    props.createArticle({
-        title: articles[articleId].title,
-        text: articles[articleId].description,
-        date: articles[articleId].publishedAt,
-        source: articles[articleId].source.name,
-        link: articles[articleId].url,   
-        image: articles[articleId].urlToImage,
-        keyword : articles[articleId].keyword
-    })
+  function addArticleClick(data) {
+    props.createArticle(data)
    
   }
     
 
   function deleteArticle(id) {
-    props.deleteArticle(props.id)
-    
+    props.deleteArticle(id)
   }
 
   return (
@@ -40,7 +31,7 @@ function NewsCardList(props) {
       <ul className="newscard__list">
         {articles.map((item, index) => <NewsCard
           succes={item.succes}
-          id={index}
+          id={item._id}
           key={item.url}
           keyword={item.keyword}
           image={item.urlToImage}
@@ -53,9 +44,6 @@ function NewsCardList(props) {
           onClick={props.onClick}
           onDelete={() => deleteArticle(item.id)}
           addArticleClick={addArticleClick}
-          // newsItem={item}
-         
-          // isSaved={isSaved(item)}
           setArticles={setArticles}
           createArticle={props.createArticle}
         />)}

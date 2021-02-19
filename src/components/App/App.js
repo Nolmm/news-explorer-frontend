@@ -196,22 +196,18 @@ function App() {
 
 
 
-  //сохранение статьи
   function createArticle(data) {
     const newArticles = savedArticles;
     mainApi.createArticle(data)
       .then((res) => {
         newArticles.push(res);
         setSavedArticles(newArticles);
-        setId(res._id);
-        const Saved = articles.filter((item) => item._id)
         const newArr = articles.map((item) => {
-          item._id = res._id
-          item.Saved = Saved
+          if (item.url === data.link) {
+            item._id = res._id
+          }
           return item
-        });
-          
-        console.log(newArr)
+        })
         setArticles(newArr)
       })
       //   const Saved = articles.map((item) => {
@@ -234,12 +230,30 @@ function App() {
 
   
 
+  // //удаление из сохраненных
+  // const deleteArticleRequest = (id) => {
+  //   return mainApi.deleteArticle(id)
+  //     .then((res) => {
+  //       const result = savedArticles.filter(item => item._id !== id);
+  //       setSavedArticles(result);
+  //       // localStorage.removeItem('Saved')
+  //     })
+  //     .catch(err => console.log(err))
+  // }
+
   //удаление из сохраненных
   const deleteArticleRequest = (id) => {
     return mainApi.deleteArticle(id)
       .then((res) => {
         const result = savedArticles.filter(item => item._id !== id);
         setSavedArticles(result);
+        const newArr = articles.map((item) => {
+          if (item._id === id) {
+            item._id = undefined
+          }
+          return item
+        })
+        setArticles(newArr)
         // localStorage.removeItem('Saved')
       })
       .catch(err => console.log(err))
