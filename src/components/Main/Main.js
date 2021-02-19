@@ -11,7 +11,7 @@ const renderContent = (data, search, createArticle, deleteArticle, loggedIn, id,
   if (search) return <Preloader />
   if (data === null) return
   if (data.length === 0) return <NotFound />
-  return <Results data={data} createArticle={createArticle} deleteArticle={deleteArticle} loggedIn={loggedIn} id={id} onClick={onClick} setSaved={setSaved}/>
+  return <Results data={data} createArticle={createArticle} deleteArticle={deleteArticle} loggedIn={loggedIn} onClick={onClick} setSaved={setSaved}/>
 }
 
 function Main(props) {
@@ -22,7 +22,7 @@ function Main(props) {
   return (
     <section className="main">
       <SearchForm requestArticles={props.requestArticles}/>
-      {renderContent(props.data, props.search, props.createArticle, props.deleteArticle, props.loggedIn, props.id, props.onClick, props.setSaved )}
+      {renderContent(props.data, props.search, props.createArticle, props.deleteArticle, props.loggedIn, props.id, props.onClick, props.setSaved)}
       <About />
     </section>
   )

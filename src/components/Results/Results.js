@@ -11,7 +11,6 @@ function Results(props) {
         createArticle={props.createArticle}
         deleteArticle={props.deleteArticle}
         loggedIn={props.loggedIn}
-        id={props.id}
         onClick={props.onClick}
         setSaved={props.setSaved}
       />

@@ -15,12 +15,9 @@ function NewsCardList(props) {
     setArticles(props.data.slice(0, 3));
   }, [props.data])
 
-
   function addArticleClick(data) {
     props.createArticle(data)
-   
   }
-    
 
   function deleteArticle(id) {
     props.deleteArticle(id)
@@ -29,8 +26,7 @@ function NewsCardList(props) {
   return (
     <div>
       <ul className="newscard__list">
-        {articles.map((item, index) => <NewsCard
-          succes={item.succes}
+        {articles.map((item) => <NewsCard
           id={item._id}
           key={item.url}
           keyword={item.keyword}
@@ -42,9 +38,8 @@ function NewsCardList(props) {
           loggedIn={props.loggedIn}
           url={item.url}
           onClick={props.onClick}
-          onDelete={() => deleteArticle(item.id)}
+          onDelete={(id) => deleteArticle(id)}
           addArticleClick={addArticleClick}
-          setArticles={setArticles}
           createArticle={props.createArticle}
         />)}
       </ul>

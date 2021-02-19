@@ -22,7 +22,6 @@ function App() {
   //показывает прелоадер
   const [search, setSearch] = React.useState(false);
   //данные от ньюс апи
-  // const [data, setData] = React.useState(null);
   const [articles, setArticles] = React.useState(null);
   //для серверных ошибок
   const [authError, setAuthError] = React.useState({
@@ -37,11 +36,9 @@ function App() {
   const [isInfoTooltipopen, setIsInfoTooltipopen] = React.useState(false);
   //открытие и закрытие мобильного меню
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [id, setId] = React.useState('');
   // стэйт для сохранённых новостей
   const [savedArticles, setSavedArticles] = React.useState([]);
   const history = useHistory();
-  
 
   //запрос к апи для получения новостей
   const requestArticles = (keyword) => {
@@ -54,7 +51,6 @@ function App() {
         });
         setArticles(arrayWithKeywords)
         localStorage.setItem('Search', JSON.stringify(arrayWithKeywords))
-        // localStorage.getItem('Saved')
       })
       .catch(err => console.log(err))
       .finally(_ => {
@@ -74,9 +70,8 @@ function App() {
           });
           const news = (JSON.parse(localStorage.getItem(('Search'))))
           setArticles(news)
-          
-        })
 
+        })
         .catch(err => console.log(err));
     }
   }, [loggedIn])
@@ -148,7 +143,6 @@ function App() {
         setAuthError({
           ...authError, register: err.message,
         });
-
       });
   }
 
@@ -183,19 +177,18 @@ function App() {
   }
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem('token')
-    Promise.all([mainApi.getUserMe(jwt), mainApi.getArticles(jwt)])
-      .then(([userData, saveCardData]) => {
-        setcurrentUser(userData)
-        setSavedArticles(saveCardData)
-      })
-      .catch(err => console.log(err))
+    if (loggedIn) {
+      const jwt = localStorage.getItem('token')
+      Promise.all([mainApi.getUserMe(jwt), mainApi.getArticles(jwt)])
+        .then(([userData, saveCardData]) => {
+          setcurrentUser(userData)
+          setSavedArticles(saveCardData)
+        })
+        .catch(err => console.log(err))
+    }
   }, [loggedIn])
 
-
-
-
-
+  //сохранение статьи
   function createArticle(data) {
     const newArticles = savedArticles;
     mainApi.createArticle(data)
@@ -210,36 +203,10 @@ function App() {
         })
         setArticles(newArr)
       })
-      //   const Saved = articles.map((item) => {
-      //     articles.filter((item) => item._id)
-          
-      //     item._id = res._id
-          
-      //     return item
-          
-      //   });
-      //   console.log(Saved)
-      //   setArticles(Saved)
-      // })
       .catch((err) => {
         console.log(err);
       });
   }
-      
-  
-
-  
-
-  // //удаление из сохраненных
-  // const deleteArticleRequest = (id) => {
-  //   return mainApi.deleteArticle(id)
-  //     .then((res) => {
-  //       const result = savedArticles.filter(item => item._id !== id);
-  //       setSavedArticles(result);
-  //       // localStorage.removeItem('Saved')
-  //     })
-  //     .catch(err => console.log(err))
-  // }
 
   //удаление из сохраненных
   const deleteArticleRequest = (id) => {
@@ -258,7 +225,7 @@ function App() {
       })
       .catch(err => console.log(err))
   }
-  
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -282,12 +249,7 @@ function App() {
               deleteArticle={deleteArticleRequest}
               loggedIn={loggedIn}
               saved={savedArticles}
-              setSaved={setSavedArticles}
-              id={id}
               onClick={handlePopupLoginClick}
-              // handleSetmarkedClick={handleSetmarkedClick}
-              // isMarked={isMarked}
-
             />
           </Route>
           <ProtectedRoute exact
@@ -298,13 +260,8 @@ function App() {
             data={articles}
             articles={savedArticles}
             saved={savedArticles}
-            setSaved={setSavedArticles}
-            id={id}
-            setId={setId}
             deleteArticle={deleteArticleRequest}
-            // handleSetmarkedClick={handleSetmarkedClick}
           />
-
         </Switch>
         <PopupRegister
           isOpen={isPopupRegisterOpen}
