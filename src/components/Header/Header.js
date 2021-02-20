@@ -10,12 +10,13 @@ function Header(props) {
     <header className={`header ${props.isOpenMob ? 'header__background' : ''} ${props.theme ? 'header_saved-news' : 'header_main'}`}>
       <Link  className="header__link" to="/"><div className={`${props.theme ? 'header__logo' : 'header__logo-main'} ${props.isOpenMob ? 'header__logo-main' : 'header__logo' }`}>NewsExplorer</div>
       </Link>
-      <button type="button" onClose={props.onClose} onClick={props.open} className={`header__burger ${props.loggedIn ? 'header__burger-img_black' : 'header__burger-img_white'} ${props.isOpenMob ? 'header__burger-close' : ''}`}></button>
+      <button type="button" onClose={props.onClose} onClick={props.open} className={`header__burger ${props.theme ? 'header__burger-img_black' : 'header__burger-img_white'} ${props.isOpenMob ? 'header__burger-close' : ''}`}></button>
       <Navigation 
       theme={props.theme}
       loggedIn={props.loggedIn} 
       onClick={props.onClick}
       isOpenMob={props.isOpenMob}
+      handleLogout={props.handleLogout}
       ></Navigation>
     </header>
   );

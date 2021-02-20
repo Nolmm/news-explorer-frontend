@@ -75,6 +75,8 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 1.33;
+  cursor: pointer;
+  margin-top: 0;
 }
 
 .popup__submit-button_disabled {
@@ -90,6 +92,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 1.33;
+  margin-top: 0;
 }
 
 .popup__link {
@@ -104,6 +107,7 @@
   color: rgba(47, 113, 229, 1);
   text-decoration: none;
   margin-left: 5px;
+  cursor: pointer;
 }
 
 .popup__or {
