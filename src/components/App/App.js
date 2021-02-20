@@ -61,7 +61,7 @@ function App() {
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      mainApi.getToken()
+      mainApi.getUserMe()
         .then((res) => {
           setcurrentUser({
             ...currentUser,
@@ -76,6 +76,24 @@ function App() {
     }
   }, [loggedIn])
 
+
+  React.useEffect(() => {
+    function tokenCheck() {
+      if(localStorage.getItem('jwt')) {
+        const jwt = localStorage.getItem('jwt')
+        Promise.all([mainApi.getUserMe(jwt), mainApi.getArticles(jwt)])
+          .then(([userData, saveCardData]) => {
+            if (userData) {
+              setLoggedIn(true);
+              setSavedArticles(saveCardData)
+            }
+          })
+        
+      }
+    }
+    tokenCheck()
+  }, [])
+  
   function handlePopupRegisterClick() {
     setIsPopupRegisterOpen(true)
   }
@@ -176,17 +194,7 @@ function App() {
     history.push('/');
   }
 
-  React.useEffect(() => {
-    if (loggedIn) {
-      const jwt = localStorage.getItem('token')
-      Promise.all([mainApi.getUserMe(jwt), mainApi.getArticles(jwt)])
-        .then(([userData, saveCardData]) => {
-          setcurrentUser(userData)
-          setSavedArticles(saveCardData)
-        })
-        .catch(err => console.log(err))
-    }
-  }, [loggedIn])
+  
 
   //сохранение статьи
   function createArticle(data) {

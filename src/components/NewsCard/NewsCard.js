@@ -40,7 +40,7 @@ function NewsCard(props) {
       <a target='_blank'
         rel='noreferrer'
         href={props.url || props.link}
-      > <img className="newscard__img" src={props.image} alt="иллюстрация к новости" /></a>
+      > <img className="newscard__img" src={props.image || props.urlToImage} alt="иллюстрация к новости" /></a>
       <figcaption className="newscard__figcaption">
         <p className="newscard__date">{changeDateformat(props.date)}</p>
         <a target='_blank'

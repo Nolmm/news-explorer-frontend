@@ -46,18 +46,6 @@ class MainApi {
             });
     }
 
-    getToken() {
-        const jwt = localStorage.getItem('jwt');
-        return fetch(`${this.baseUrl}/users/me`, {
-            method: 'GET',
-            headers: {
-                ...this.headers,
-                "Authorization": `Bearer ${jwt}`
-            }
-        })
-            .then(res => res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`));
-    }
-
     getArticles() {
         const jwt = localStorage.getItem('jwt');
         return fetch(`${this.baseUrl}/articles`, {

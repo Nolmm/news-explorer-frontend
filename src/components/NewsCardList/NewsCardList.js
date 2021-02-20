@@ -11,10 +11,6 @@ function NewsCardList(props) {
     setArticles(props.data.slice(0, index));
   }
 
-  React.useEffect(() => {
-    setArticles(props.data.slice(0, 3));
-  }, [props.data])
-
   function addArticleClick(data) {
     props.createArticle(data)
   }
